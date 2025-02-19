@@ -1,3 +1,5 @@
+import { HexOpacity, OpacityLevel } from './types';
+
 export const TRANSPARENT = '#0000';
 export const DEFAULT = 'default';
 
@@ -112,7 +114,7 @@ export const HSLColors = {
 	],
 };
 
-export const opacityLevelMap = new Map<number, string>(
+export const opacityLevelMap = new Map<OpacityLevel, HexOpacity>(
 	Object.entries({
 		90: 'E6',
 		80: 'CC',
@@ -123,5 +125,5 @@ export const opacityLevelMap = new Map<number, string>(
 		30: '4D',
 		20: '33',
 		10: '1A',
-	}).map(([key, value]) => [Number(key), value]),
+	}).map(([key, value]) => [Number(key) as OpacityLevel, value as HexOpacity]),
 );
