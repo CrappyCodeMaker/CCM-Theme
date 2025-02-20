@@ -9,3 +9,4 @@
 
 # Re-include Folders
 !public/themes
+!public/images/icon.png

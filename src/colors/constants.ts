@@ -1,8 +1,13 @@
-import type { Default, HexColor, HexOpacity, OpacityLevel } from './types';
+import type { Default, HexColor, HexOpacity, OpacityLevel, Shade } from './types';
+
+// #region DEFAULTS
 
 export const TRANSPARENT: HexColor = '#0000';
 export const DEFAULT: Default = 'default';
 export const TESTER: HexColor = '#f009';
+export const SHADES: Shade[] = [900, 800, 700, 600, 500, 400, 300, 200, 100, 50];
+
+// #endregion DEFAULTS
 
 export const opacityLevelMap = new Map<OpacityLevel, HexOpacity>(
 	Object.entries({

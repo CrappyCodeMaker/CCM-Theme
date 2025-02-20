@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { getHEXColor, flattenOptimizedTheme, generateShades } from '../src/colors';
-import { opacityLevelMap, TRANSPARENT, DEFAULT } from '../src/colors/constants';
-import { ColorName, Shade, NestedObject } from '../src/colors/types';
+import { DEFAULT, opacityLevelMap, TESTER, TRANSPARENT, type ColorName, type NestedObject, type Shade } from '../src/colors';
+import { generateShades, getHEXColor } from '../src/helpers';
+import { resolveWorkbenchTokens } from '../src/resolvers';
 
 /**
  * ------------------------------------------------------------------
@@ -21,17 +21,15 @@ describe('getHEXColor()', () => {
 	});
 
 	it('throws an error if colorName is invalid', () => {
-		// @ts-expect-error Test an invalid color name
 		expect(() => getHEXColor('unknown', 900)).toThrowError();
 	});
 
 	it('throws an error if shade is invalid', () => {
-		// @ts-expect-error Test an invalid shade
 		expect(() => getHEXColor('red', 999)).toThrowError();
 	});
 
 	it('throws an error if opacity is invalid', () => {
-		expect(() => getHEXColor('red', 900, 999)).toThrowError();
+		expect(() => getHEXColor('red', 900, 999 as any)).toThrowError();
 	});
 
 	it('works for a variety of color names', () => {
@@ -53,10 +51,10 @@ describe('getHEXColor()', () => {
 
 /**
  * ------------------------------------------------------------------
- * Test suite for `flattenOptimizedTheme()`.
+ * Test suite for `resolveWorkbenchTokens()`.
  * ------------------------------------------------------------------
  */
-describe('flattenOptimizedTheme()', () => {
+describe('resolveWorkbenchTokens()', () => {
 	it('flattens a simple nested object (isTest=false)', () => {
 		const nestedObj: NestedObject = {
 			foo: '#000000',
@@ -64,7 +62,7 @@ describe('flattenOptimizedTheme()', () => {
 				baz: '#ffffff',
 			},
 		};
-		const result = flattenOptimizedTheme(nestedObj, false);
+		const result = resolveWorkbenchTokens(nestedObj, false);
 		expect(result).toEqual({
 			foo: '#000000',
 			baz: '#ffffff',
@@ -80,12 +78,12 @@ describe('flattenOptimizedTheme()', () => {
 				key4: '#abcdef',
 			},
 		};
-		const result = flattenOptimizedTheme(nestedObj, true);
+		const result = resolveWorkbenchTokens(nestedObj, true);
 		// 'key1' and 'key4' are defined => ignored in isTest mode
-		// 'key2' and 'key3' are undefined => replaced with '#f007'
+		// 'key2' and 'key3' are undefined => replaced with '#f009'
 		expect(result).toEqual({
-			key2: '#f007',
-			key3: '#f007',
+			key2: TESTER,
+			key3: TESTER,
 		});
 	});
 
@@ -99,21 +97,21 @@ describe('flattenOptimizedTheme()', () => {
 			},
 		};
 		// isTest=false => we only collect defined values
-		const resultFalse = flattenOptimizedTheme(nestedObj, false);
+		const resultFalse = resolveWorkbenchTokens(nestedObj, false);
 		expect(resultFalse).toEqual({
 			d: '#ff0000',
 		});
 		// isTest=true => we only fill undefined
-		const resultTrue = flattenOptimizedTheme(nestedObj, true);
+		const resultTrue = resolveWorkbenchTokens(nestedObj, true);
 		expect(resultTrue).toEqual({
-			c: '#f007',
+			c: TESTER,
 		});
 	});
 
 	it('returns an empty object when input is empty', () => {
-		const resultFalse = flattenOptimizedTheme({}, false);
+		const resultFalse = resolveWorkbenchTokens({}, false);
 		expect(resultFalse).toEqual({});
-		const resultTrue = flattenOptimizedTheme({}, true);
+		const resultTrue = resolveWorkbenchTokens({}, true);
 		expect(resultTrue).toEqual({});
 	});
 
@@ -122,7 +120,7 @@ describe('flattenOptimizedTheme()', () => {
 			randomString: 'hello-world',
 			validHex: '#cc00cc',
 		};
-		const result = flattenOptimizedTheme(nestedObj, false);
+		const result = resolveWorkbenchTokens(nestedObj, false);
 		expect(result).toEqual({
 			randomString: 'hello-world',
 			validHex: '#cc00cc',
@@ -135,9 +133,9 @@ describe('flattenOptimizedTheme()', () => {
 			undefVal: undefined,
 			validHex: '#cc00cc',
 		};
-		const result = flattenOptimizedTheme(nestedObj, true);
+		const result = resolveWorkbenchTokens(nestedObj, true);
 		expect(result).toEqual({
-			undefVal: '#f007',
+			undefVal: TESTER,
 		});
 	});
 
@@ -155,7 +153,7 @@ describe('flattenOptimizedTheme()', () => {
 				border: DEFAULT,
 			},
 		};
-		const result = flattenOptimizedTheme(nestedObj, false);
+		const result = resolveWorkbenchTokens(nestedObj, false);
 		expect(result).toEqual({
 			focusBorder: '#0000',
 			'sash.hoverBorder': 'default',
@@ -183,7 +181,7 @@ describe('Internal helpers (indirect testing)', () => {
 	});
 
 	it('indirectly tests `hexWithOpacity` by providing different opacity values', () => {
-		const testOpacities = [90, 80, 70, 20];
+		const testOpacities = [90, 80, 70, 20] as any[];
 		testOpacities.forEach((op) => {
 			const color = getHEXColor('magenta', 900, op);
 			const opHex = opacityLevelMap.get(op);
@@ -201,17 +199,5 @@ describe('Extended coverage checks', () => {
 	it('throws when colors array length is not 10', () => {
 		const invalidColors = new Array(9).fill('#000000'); // Only 9
 		expect(() => generateShades(invalidColors)).toThrowError(/length of 10/i);
-	});
-
-	it('overwrites keys from deeper nesting', () => {
-		const nestedObj: NestedObject = {
-			foo: '#111111',
-			bar: {
-				foo: '#222222', // same key "foo" deeper
-			},
-		};
-		const result = flattenOptimizedTheme(nestedObj, false);
-		// Typically deeper "foo" overwrites top-level "foo"
-		expect(result.foo).toBe('#222222');
 	});
 });

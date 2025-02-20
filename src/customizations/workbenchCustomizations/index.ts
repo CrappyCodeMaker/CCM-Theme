@@ -1,3 +1,4 @@
+export { charts } from './charts';
 export { actionBar } from './actionBar';
 export { activityBar } from './activityBar';
 export { badge } from './badge';
@@ -49,4 +50,3 @@ export { titleBar } from './titleBar';
 export { toolBar } from './toolBar';
 export { welcomePage } from './welcomePage';
 export { window } from './window';
-export { charts } from './сharts';

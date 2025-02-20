@@ -1,4 +1,4 @@
-import { HexColor } from '../colors/types';
+import type { HexColor } from '../colors';
 
 /**
  * @group Validators

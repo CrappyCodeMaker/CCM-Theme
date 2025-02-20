@@ -1,4 +1,6 @@
-const baseTokens = [
+import { Token } from '../colors/types';
+
+const baseTokens: Token[] = [
 	{
 		scope: ['comment'],
 		settings: { foreground: ['neutral', 400] },
@@ -39,7 +41,7 @@ const baseTokens = [
 	},
 ];
 
-export const tokenCustomizations = [
+export const tokenCustomizations: Token[] = [
 	...baseTokens,
 
 	{

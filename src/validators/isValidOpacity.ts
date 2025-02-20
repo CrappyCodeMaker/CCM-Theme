@@ -1,5 +1,4 @@
-import { opacityLevelMap } from '../colors/constants';
-import { OpacityLevel } from '../colors/types';
+import { opacityLevelMap, type OpacityLevel } from '../colors';
 
 /**
  * @group Validators

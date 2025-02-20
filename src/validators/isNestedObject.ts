@@ -1,4 +1,4 @@
-import { Default, HSLColor, NestedObject } from '../colors/types';
+import type { Default, HSLColor, NestedObject } from '../colors';
 
 /**
  * @group Validators

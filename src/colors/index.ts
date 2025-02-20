@@ -1,4 +1,3 @@
 export { Color } from './color';
-export { DEFAULT, TRANSPARENT, TESTER, ANSIcolors } from './constants';
-export { getHEXColor, flattenOptimizedTheme, generateShades } from './helpers';
-export type { HexColor, ColorName, Shade, OpacityLevel, NestedObject, Theme, ColorShades, HSLColor } from './types';
+export { TRANSPARENT, DEFAULT, TESTER, SHADES, opacityLevelMap, ANSIcolors } from './constants';
+export type { Default, HexOpacity, HexColor, ColorName, Shade, OpacityLevel, NestedObject, Theme, ColorShades, HSLColor, Token } from './types';
