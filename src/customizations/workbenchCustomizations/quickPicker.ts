@@ -1,12 +1,12 @@
-import { DEFAULT, getHEXColor } from '../../colors';
+import { DEFAULT } from '../../colors';
 
 export const quickPicker = {
 	// Quick picker (Quick Open) color for grouping borders
 	'pickerGroup.border': DEFAULT,
 	// Quick picker (Quick Open) color for grouping labels
-	'pickerGroup.foreground': getHEXColor('neutral', 600),
+	'pickerGroup.foreground': ['neutral', 600],
 	// Quick input background color. The quick input widget is the container for views like the color theme picker
-	'quickInput.background': getHEXColor('neutral', 800),
+	'quickInput.background': ['neutral', 800],
 	// Quick input foreground color. The quick input widget is the container for views like the color theme picker
 	'quickInput.foreground': DEFAULT,
 	// Quick picker background color for the focused item

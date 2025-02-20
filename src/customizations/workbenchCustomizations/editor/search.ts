@@ -1,9 +1,9 @@
-import { DEFAULT, TRANSPARENT, getHEXColor } from '../../../colors';
+import { DEFAULT, TRANSPARENT } from '../../../colors';
 
 // Search colors are used in the search viewlet's global search results
 export const search = {
 	// Color of the text in the search viewlet's completion message. For example, this color is used in the text that says "{x} results in {y} files"
-	'search.resultsInfoForeground': getHEXColor('neutral', 500),
+	'search.resultsInfoForeground': ['neutral', 500],
 };
 
 /**
@@ -22,19 +22,19 @@ export const searchEditor = {
 // Find colors depend on the current find string in the Find/Replace dialog
 export const findMatch = {
 	// Color of the current search match
-	'editor.findMatchBackground': getHEXColor('yellow', 400, 40),
+	'editor.findMatchBackground': ['yellow', 400, 40],
 	// Text color of the current search match
 	'editor.findMatchForeground': DEFAULT,
 	// Border color of the current search match
-	'editor.findMatchBorder': getHEXColor('yellow', 400),
+	'editor.findMatchBorder': ['yellow', 400],
 	// Color of the other search matches. The color must not be opaque so as not to hide underlying decorations
-	'editor.findMatchHighlightBackground': getHEXColor('violet', 400, 40),
+	'editor.findMatchHighlightBackground': ['violet', 400, 40],
 	// Foreground color of the other search matches
 	'editor.findMatchHighlightForeground': DEFAULT,
 	// Border color of the other search matches
-	'editor.findMatchHighlightBorder': getHEXColor('violet', 400),
+	'editor.findMatchHighlightBorder': ['violet', 400],
 	// Color the range limiting the search (Enable 'Find in Selection' in the find widget). The color must not be opaque so as not to hide underlying decorations
-	'editor.findRangeHighlightBackground': getHEXColor('violet', 400, 20),
+	'editor.findRangeHighlightBackground': ['violet', 400, 20],
 	// Border color the range limiting the search (Enable 'Find in Selection' in the find widget)
 	'editor.findRangeHighlightBorder': TRANSPARENT,
 	// Background color for highlighting the line at the findMatch position (`default` is equal to the color of `editor.lineHighlightBackground`)

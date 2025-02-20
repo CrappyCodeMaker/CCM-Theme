@@ -1,32 +1,32 @@
-import { DEFAULT, getHEXColor } from '../../colors';
+import { DEFAULT } from '../../colors';
 
 export const gitDecoration = {
 	// Color for added Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.addedResourceForeground': getHEXColor('green', 600),
+	'gitDecoration.addedResourceForeground': ['green', 600],
 	// Color for modified Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.modifiedResourceForeground': getHEXColor('violet', 300),
+	'gitDecoration.modifiedResourceForeground': ['violet', 300],
 	// Color for deleted Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.deletedResourceForeground': getHEXColor('red', 400),
+	'gitDecoration.deletedResourceForeground': ['red', 400],
 	// Color for renamed or copied Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.renamedResourceForeground': getHEXColor('green', 300),
+	'gitDecoration.renamedResourceForeground': ['green', 300],
 	// Color for staged modifications git decorations. Used for file labels and the SCM viewlet
-	'gitDecoration.stageModifiedResourceForeground': getHEXColor('violet', 400),
+	'gitDecoration.stageModifiedResourceForeground': ['violet', 400],
 	// Color for staged deletions git decorations. Used for file labels and the SCM viewlet
-	'gitDecoration.stageDeletedResourceForeground': getHEXColor('red', 500),
+	'gitDecoration.stageDeletedResourceForeground': ['red', 500],
 	// Color for untracked Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.untrackedResourceForeground': getHEXColor('green', 400),
+	'gitDecoration.untrackedResourceForeground': ['green', 400],
 	// Color for ignored Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.ignoredResourceForeground': getHEXColor('neutral', 500),
+	'gitDecoration.ignoredResourceForeground': ['neutral', 500],
 	// Color for conflicting Git resources. Used for file labels and the SCM viewlet
-	'gitDecoration.conflictingResourceForeground': getHEXColor('yellow', 300),
+	'gitDecoration.conflictingResourceForeground': ['yellow', 300],
 	// Color for submodule resources
 	'gitDecoration.submoduleResourceForeground': DEFAULT,
 
 	// Gutter Decoration
 	// Color for modified line of code
-	'editorGutter.modifiedBackground': getHEXColor('violet', 400),
+	'editorGutter.modifiedBackground': ['violet', 400],
 	// Color for new added line of code
-	'editorGutter.addedBackground': getHEXColor('green', 400),
+	'editorGutter.addedBackground': ['green', 400],
 	// Color for deleted line of code
-	'editorGutter.deletedBackground': getHEXColor('red', 400),
+	'editorGutter.deletedBackground': ['red', 400],
 };

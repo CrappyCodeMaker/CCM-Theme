@@ -1,4 +1,4 @@
-import { HexColor, HSLColor } from './types';
+import type { HexColor, HSLColor } from './types';
 
 /**
  * A utility class for working with colors.

@@ -1,28 +1,28 @@
 // Panels are shown below the editor area and contain views like Output and Integrated Terminal
 
-import { DEFAULT, getHEXColor } from '../../colors';
+import { DEFAULT } from '../../colors';
 
 export const panel = {
 	// Panel background color
-	'panel.background': getHEXColor('neutral', 700),
+	'panel.background': ['neutral', 700],
 	// Panel border color to separate the panel from the editor
-	'panel.border': getHEXColor('neutral', 900),
+	'panel.border': ['neutral', 900],
 	// Drag and drop feedback color for the panel titles. Panels are shown below the editor area and contain views like output and integrated terminal
 	'panel.dropBorder': DEFAULT,
 	// Border color for the active panel title
-	'panelTitle.activeBorder': getHEXColor('green', 400),
+	'panelTitle.activeBorder': ['green', 400],
 	// Title color for the active panel
-	'panelTitle.activeForeground': getHEXColor('neutral', 100),
+	'panelTitle.activeForeground': ['neutral', 100],
 	// Title color for the inactive panel
-	'panelTitle.inactiveForeground': getHEXColor('neutral', 500),
+	'panelTitle.inactiveForeground': ['neutral', 500],
 	// Input box border for inputs in the panel
-	'panelInput.border': getHEXColor('neutral', 900),
+	'panelInput.border': ['neutral', 900],
 	// Panel section border color used when multiple views are stacked horizontally in the panel. Panels are shown below the editor area and contain views like output and integrated terminal
 	'panelSection.border': DEFAULT,
 	// Drag and drop feedback color for the panel sections. The color should have transparency so that the panel sections can still shine through. Panels are shown below the editor area and contain views like output and integrated terminal
-	'panelSection.dropBackground': getHEXColor('neutral', 200, 10),
+	'panelSection.dropBackground': ['neutral', 200, 10],
 	// Panel section header background color. Panels are shown below the editor area and contain views like output and integrated terminal
-	'panelSectionHeader.background': getHEXColor('neutral', 600),
+	'panelSectionHeader.background': ['neutral', 600],
 	// Panel section header foreground color. Panels are shown below the editor area and contain views like output and integrated terminal
 	'panelSectionHeader.foreground': DEFAULT,
 	// Background color of sticky scroll in the panel

@@ -1,47 +1,47 @@
-import { DEFAULT, TRANSPARENT, getHEXColor } from '../../colors';
+import { DEFAULT, TRANSPARENT } from '../../colors';
 
 // Colors for list and trees like the File Explorer. An active list/tree has keyboard focus, an inactive does not
 export const listsAndTrees = {
 	// List/Tree background color for the selected item when the list/tree is active
-	'list.activeSelectionBackground': getHEXColor('violet', 400, 40),
+	'list.activeSelectionBackground': ['violet', 400, 40],
 	// List/Tree foreground color for the selected item when the list/tree is active
-	'list.activeSelectionForeground': getHEXColor('neutral', 100),
+	'list.activeSelectionForeground': ['neutral', 100],
 	// List/Tree icon foreground color for the selected item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not
-	'list.activeSelectionIconForeground': getHEXColor('neutral', 100),
+	'list.activeSelectionIconForeground': ['neutral', 100],
 	// List/Tree drag and drop background when moving items around using the mouse
-	'list.dropBackground': getHEXColor('neutral', 200, 10),
+	'list.dropBackground': ['neutral', 200, 10],
 	// List/Tree background color for the focused item when the list/tree is active
-	'list.focusBackground': getHEXColor('violet', 400, 40),
+	'list.focusBackground': ['violet', 400, 40],
 	// List/Tree foreground color for the focused item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not
-	'list.focusForeground': getHEXColor('neutral', 100),
+	'list.focusForeground': ['neutral', 100],
 	// List/Tree foreground color of the match highlights on actively focused items when searching inside the list/tree
-	'list.focusHighlightForeground': getHEXColor('neutral', 100),
+	'list.focusHighlightForeground': ['neutral', 100],
 	// List/Tree outline color for the focused item when the list/tree is active. An active list/tree has keyboard focus, an inactive does not
-	'list.focusOutline': getHEXColor('violet', 400),
+	'list.focusOutline': ['violet', 400],
 	// List/Tree outline color for the focused item when the list/tree is active and selected. An active list/tree has keyboard focus, an inactive does not
-	'list.focusAndSelectionOutline': getHEXColor('violet', 400),
+	'list.focusAndSelectionOutline': ['violet', 400],
 	// List/Tree foreground color of the match highlights when searching inside the list/tree
-	'list.highlightForeground': getHEXColor('violet', 300),
+	'list.highlightForeground': ['violet', 300],
 	// List/Tree background when hovering over items using the mouse
-	'list.hoverBackground': getHEXColor('neutral', 600),
+	'list.hoverBackground': ['neutral', 600],
 	// List/Tree foreground when hovering over items using the mouse
-	'list.hoverForeground': getHEXColor('neutral', 100),
+	'list.hoverForeground': ['neutral', 100],
 	// List/Tree background color for the selected item when the list/tree is inactive
-	'list.inactiveSelectionBackground': getHEXColor('neutral', 600),
+	'list.inactiveSelectionBackground': ['neutral', 600],
 	// List/Tree foreground color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not
 	'list.inactiveSelectionForeground': DEFAULT,
 	// List/Tree icon foreground color for the selected item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not
 	'list.inactiveSelectionIconForeground': DEFAULT,
 	// List background color for the focused item when the list is inactive. An active list has keyboard focus, an inactive does not. Currently only supported in lists
-	'list.inactiveFocusBackground': getHEXColor('neutral', 600),
+	'list.inactiveFocusBackground': ['neutral', 600],
 	// List/Tree outline color for the focused item when the list/tree is inactive. An active list/tree has keyboard focus, an inactive does not
 	'list.inactiveFocusOutline': TRANSPARENT,
 	// List/Tree foreground color for invalid items, for example an unresolved root in explorer
 	'list.invalidItemForeground': DEFAULT,
 	// Foreground color of list items containing errors
-	'list.errorForeground': getHEXColor('red', 500),
+	'list.errorForeground': ['red', 500],
 	// Foreground color of list items containing warnings
-	'list.warningForeground': getHEXColor('yellow', 400),
+	'list.warningForeground': ['yellow', 400],
 	// List/Tree Filter background color of typed text when searching inside the list/tree
 	'listFilterWidget.background': DEFAULT,
 	// List/Tree Filter Widget's outline color of typed text when searching inside the list/tree
@@ -59,9 +59,9 @@ export const listsAndTrees = {
 	// List/Tree drag and drop border color when moving items between items when using the mouse
 	'list.dropBetweenBackground': DEFAULT,
 	// Tree Widget's stroke color for indent guides
-	'tree.indentGuidesStroke': getHEXColor('neutral', 400),
+	'tree.indentGuidesStroke': ['neutral', 400],
 	// Tree stroke color for the indentation guides that are not active
-	'tree.inactiveIndentGuidesStroke': getHEXColor('neutral', 600),
+	'tree.inactiveIndentGuidesStroke': ['neutral', 600],
 	// Tree stroke color for the indentation guides
 	'tree.tableColumnsBorder': DEFAULT,
 	// Background color for odd table rows

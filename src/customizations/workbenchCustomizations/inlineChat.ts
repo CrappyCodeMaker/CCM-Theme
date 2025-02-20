@@ -3,7 +3,7 @@ import { DEFAULT } from '../../colors';
 export const inlineChat = {
 	// Background color of the interactive editor widget
 	'inlineChat.background': DEFAULT,
-	// Foreground color of the interactive editor widge
+	// Foreground color of the interactive editor widget
 	'inlineChat.foreground': DEFAULT,
 	// Border color of the interactive editor widget
 	'inlineChat.border': DEFAULT,
