@@ -10,7 +10,7 @@ import { HexColor } from '../colors/types';
  * - `#RRGGBB`
  * - `#RRGGBBAA`
  *
- * @param {string | undefined} color - The string value to check. May be undefined.
+ * @param {unknown} color - The string value to check. May be undefined.
  * @returns {color is HexColor} `true` if the input is a valid hex color string, otherwise `false`.
  *
  * @example
@@ -21,5 +21,5 @@ import { HexColor } from '../colors/types';
  * isValidHexColor('#xyz');      // => false
  * isValidHexColor(undefined);   // => false
  */
-export const isValidHexColor = (color: string | undefined): color is HexColor =>
-	!color ? false : /^#([0-9A-F]{3}|[0-9A-F]{4}|[0-9A-F]{6}|[0-9A-F]{8})$/i.test(color);
+export const isValidHexColor = (color: unknown): color is HexColor =>
+	!color || typeof color !== 'string' ? false : /^#([0-9A-F]{3}|[0-9A-F]{4}|[0-9A-F]{6}|[0-9A-F]{8})$/i.test(color);

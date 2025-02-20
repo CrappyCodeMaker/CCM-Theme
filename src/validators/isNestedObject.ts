@@ -1,4 +1,4 @@
-import { NestedObject } from '../colors/types';
+import { Default, HSLColor, NestedObject } from '../colors/types';
 
 /**
  * @group Validators
@@ -34,5 +34,5 @@ import { NestedObject } from '../colors/types';
  * isNestedObject(undefined);
  * // => false
  */
-export const isNestedObject = (value: string | undefined | NestedObject): value is NestedObject =>
+export const isNestedObject = (value: string | NestedObject | Default | HSLColor | undefined): value is NestedObject =>
 	value != null && typeof value === 'object' && !Array.isArray(value);

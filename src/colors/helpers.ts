@@ -1,8 +1,11 @@
+import { getThemeContext } from '..';
 import { isNestedObject, isValidHexColor, isValidOpacity } from '../validators';
 import { Color } from './color';
-import { HSLColors, opacityLevelMap } from './constants';
-import { ColorName, ColorShades, HexColor, HSLColor, NestedObject, OpacityLevel, Shade, Theme } from './types';
+import { ANSIcolors, DEFAULT, opacityLevelMap, TESTER, TRANSPARENT } from './constants';
+import { HSL_Dark } from './sets';
+import type { ColorName, ColorShades, HexColor, HSLColor, NestedObject, OpacityLevel, Shade, Theme } from './types';
 
+const themeColors = HSL_Dark;
 /**
  * Appends an opacity value to a HEX color using the opacity level map.
  *
@@ -53,21 +56,26 @@ export const generateShades = (colors: (HexColor | HSLColor)[]): ColorShades => 
  *
  * @param {ColorName} colorName - The name of the color (e.g. "red", "blue", etc.).
  * @param {Shade} shade - The shade value (e.g. 900, 800, ..., 50).
- * @param {number} [opacity] - Optional opacity value.
+ * @param {OpacityLevel} [opacity] - Optional opacity value.
  * @returns {HexColor} The resulting HEX color, optionally with opacity appended.
  * @throws {Error} If the generated HEX color is invalid or the opacity value is invalid.
  */
-export const getHEXColor = (colorName: ColorName, shade: Shade, opacity?: number): HexColor => {
-	const colorsMap = generateShades(HSLColors?.[colorName]);
+export const getHEXColor = (colorName: ColorName, shade: Shade, opacity?: OpacityLevel): HexColor => {
+	const isLightTheme = getThemeContext();
+
+	const colorsMap = generateShades(themeColors?.[colorName]);
 	const hexColor = colorsMap.get(shade);
 
-	if (!isValidHexColor(hexColor)) throw new Error(`Invalid HEX color: ${hexColor}`);
+	if (!isValidHexColor(hexColor))
+		throw new Error(`${ANSIcolors.red}Invalid HEX color:${ANSIcolors.reset} ${ANSIcolors.redBG} ${hexColor} ${ANSIcolors.reset}`);
 	if (!opacity) return hexColor;
 
-	if (!isValidOpacity(opacity)) throw new Error(`Invalid Opacity value: ${opacity}`);
+	if (!isValidOpacity(opacity))
+		throw new Error(`${ANSIcolors.red}Invalid Opacity value:${ANSIcolors.reset} ${ANSIcolors.redBG} ${opacity} ${ANSIcolors.reset}`);
 	return hexWithOpacity(hexColor, opacity);
 };
 
+const isFinal = (obj: object) => obj.hasOwnProperty('color') && obj.hasOwnProperty('shade');
 /**
  * Recursively flattens a nested theme object into a flat theme object.
  *
@@ -77,7 +85,7 @@ export const getHEXColor = (colorName: ColorName, shade: Shade, opacity?: number
  * - When `isTest` is **false** (the default), defined (non-undefined) values are copied
  *   into the result object as HEX color strings.
  * - When `isTest` is **true**, only keys with undefined values are assigned a fallback
- *   HEX color (`'#f007'`). (Defined values are ignored.)
+ *   HEX color (`'#f009'`). (Defined values are ignored.)
  *
  * @param {NestedObject} obj - The nested theme object to flatten.
  * @param {boolean} [isTest=false] - If true, keys with undefined values are replaced with a fallback color.
@@ -86,12 +94,23 @@ export const getHEXColor = (colorName: ColorName, shade: Shade, opacity?: number
  */
 export const flattenOptimizedTheme = (obj: NestedObject, isTest: boolean = false, result: Theme = {}): Theme => {
 	Object.entries(obj).forEach(([key, value]) => {
-		if (isNestedObject(value)) {
+		if (isNestedObject(value) && !isFinal(value)) {
+			console.log('NESTED');
 			flattenOptimizedTheme(value, isTest, result);
-		} else if (!isTest && value !== undefined) {
-			result[key] = value as HexColor;
-		} else if (isTest && value === undefined) {
-			result[key] = '#f007';
+		} else {
+			if (isTest && value === undefined) {
+				console.log('ONLY TEST');
+				result[key] = TESTER;
+			}
+
+			if (!isTest && value !== undefined) {
+				if (value === TRANSPARENT || value === DEFAULT) result[key] = value as HexColor;
+				else {
+					if (!isFinal(value as object)) console.warn(`WTF is this: ${JSON.stringify(value, null, 2)}`);
+					const hexColor = getHEXColor((value as any)?.color, (value as any)?.shade, (value as any)?.opacity);
+					result[key] = hexColor as HexColor;
+				}
+			}
 		}
 	});
 
