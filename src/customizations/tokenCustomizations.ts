@@ -600,7 +600,7 @@ export const tokenCustomizations = [
 		},
 	},
 	{
-		scope: ['constant.language', 'constant.language.boolean', 'keyword.operator.expression.void'],
+		scope: ['constant.language', 'constant.language.boolean', 'keyword.operator.expression.void', 'constant.language.json'],
 		settings: {
 			fontStyle: 'italic bold',
 			foreground: getHEXColor('violet', 500),
