@@ -61,6 +61,7 @@
 	"scripts": {
 		"prebuild": "rm -rf ./build",
 		"build": "tsc",
+		"prepackage": "pnpm generate-theme",
 		"package": "vsce package",
 		"generate-theme": "pnpm tsx ./src/index.ts",
 		"test": "NODE_ENV=unittest vitest",
