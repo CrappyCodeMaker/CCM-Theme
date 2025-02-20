@@ -602,7 +602,7 @@ export const tokenCustomizations = [
 	{
 		scope: ['constant.language', 'constant.language.boolean', 'keyword.operator.expression.void'],
 		settings: {
-			fontStyle: 'italic',
+			fontStyle: 'italic bold',
 			foreground: getHEXColor('violet', 500),
 		},
 	},
