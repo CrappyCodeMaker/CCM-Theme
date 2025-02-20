@@ -2,7 +2,7 @@
 	"name": "crappycode-theme",
 	"displayName": "CrappyCodeMaker Theme",
 	"description": "CrappyCodeMaker themes for VS Code",
-	"version": "2.1.0",
+	"version": "2.1.0-beta",
 	"author": "Danil Reznichenko [@danilrez]",
 	"publisher": "CrappyCodeMaker",
 	"license": "MIT",
@@ -61,7 +61,7 @@
 	"scripts": {
 		"prebuild": "rm -rf ./build",
 		"build": "tsc",
-		"package": "vsce package -o ./ccm-vscode-theme.vsix",
+		"package": "vsce package",
 		"generate-theme": "pnpm tsx ./src/index.ts",
 		"test": "NODE_ENV=unittest vitest",
 		"test:set": "pnpm tsx ./tests/manual/themeColors.test.ts",
