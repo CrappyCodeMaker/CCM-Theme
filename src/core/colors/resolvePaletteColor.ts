@@ -1,5 +1,5 @@
 import { opacityLevelMap, type ColorName, type HexColor, type OpacityLevel, type Shade } from '../../colors';
-import { colorsSets } from '../../colors/palettes';
+import { palettes } from '../../colors/palettes';
 import { FancyText } from '../fancyText';
 import { generateShades } from './generateShades';
 import { getThemeType } from '../theme/themeContext';
@@ -19,7 +19,7 @@ const hexWithOpacity = (color: HexColor, opacity: OpacityLevel): HexColor => `${
  * @description Retrieves a HEX color for a given color name and shade, with an optional opacity.
  *
  * This function uses the current theme type (via getThemeType) to select the appropriate
- * color set from colorsSets, generates a shades map for the specified color name, and returns
+ * color set from palettes, generates a shades map for the specified color name, and returns
  * the HEX color for the requested shade. If an opacity is provided, it is validated and
  * applied using hexWithOpacity.
  *
@@ -44,7 +44,7 @@ export const resolvePaletteColor = (
 	opacity?: OpacityLevel | string | number,
 ): HexColor => {
 	const themeType = getThemeType();
-	const palette = colorsSets[themeType]?.[colorName];
+	const palette = palettes[themeType]?.[colorName];
 	const { red, redBG, bold } = FancyText;
 
 	if (!palette) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid palette for color:')} ${bold(redBG(colorName))}\n`);

@@ -1,4 +1,4 @@
-import { colorsSets } from './palettes';
+import { palettes } from './palettes';
 
 /**
  * Represents a single valid hex digit (0-9, A-F, a-f).
@@ -11,7 +11,7 @@ type HexChar = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | 'A' |
 export type Default = 'default';
 export type HexOpacity = `${HexChar}${HexChar}`;
 export type HexColor = `#${string}`;
-export type ColorName = keyof (typeof colorsSets)['dark'];
+export type ColorName = keyof (typeof palettes)['dark'];
 export type Shade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type OpacityLevel = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90;
 

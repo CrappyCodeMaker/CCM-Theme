@@ -47,57 +47,57 @@ export class FancyText {
 
 	// Foreground color methods
 	static black(text: string | number): string {
-		return this.nodeColorsMap.black + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.black + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static red(text: string | number): string {
-		return this.nodeColorsMap.red + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.red + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static green(text: string | number): string {
-		return this.nodeColorsMap.green + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.green + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static yellow(text: string | number): string {
-		return this.nodeColorsMap.yellow + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.yellow + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static blue(text: string | number): string {
-		return this.nodeColorsMap.blue + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.blue + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static magenta(text: string | number): string {
-		return this.nodeColorsMap.magenta + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.magenta + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static cyan(text: string | number): string {
-		return this.nodeColorsMap.cyan + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.cyan + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static white(text: string | number): string {
-		return this.nodeColorsMap.white + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.white + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static dim(text: string | number): string {
-		return this.nodeColorsMap.dim + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.dim + String(text) + FancyText.nodeColorsMap.reset;
 	}
 
 	// Background color methods
 	static blackBG(text: string | number): string {
-		return this.nodeColorsMap.blackBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.blackBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static redBG(text: string | number): string {
-		return this.nodeColorsMap.redBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.redBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static greenBG(text: string | number): string {
-		return this.nodeColorsMap.greenBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.greenBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static yellowBG(text: string | number): string {
-		return this.nodeColorsMap.yellowBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.yellowBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static blueBG(text: string | number): string {
-		return this.nodeColorsMap.blueBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.blueBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static magentaBG(text: string | number): string {
-		return this.nodeColorsMap.magentaBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.magentaBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static cyanBG(text: string | number): string {
-		return this.nodeColorsMap.cyanBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.cyanBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 	static whiteBG(text: string | number): string {
-		return this.nodeColorsMap.whiteBG + String(text) + this.nodeColorsMap.reset;
+		return FancyText.nodeColorsMap.whiteBG + String(text) + FancyText.nodeColorsMap.reset;
 	}
 
 	/**
@@ -108,7 +108,7 @@ export class FancyText {
 	 */
 	static bold(text: string | number): string {
 		const boldCode = '\x1b[1m';
-		return boldCode + String(text) + this.nodeColorsMap.reset;
+		return boldCode + String(text) + FancyText.nodeColorsMap.reset;
 	}
 
 	/**
@@ -119,6 +119,6 @@ export class FancyText {
 	 */
 	static italic(text: string | number): string {
 		const italicCode = '\x1b[3m';
-		return italicCode + String(text) + this.nodeColorsMap.reset;
+		return italicCode + String(text) + FancyText.nodeColorsMap.reset;
 	}
 }
