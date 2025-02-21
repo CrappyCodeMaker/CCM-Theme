@@ -19,11 +19,22 @@ const getPath = (type: ThemeType) => {
 	}
 };
 
-export const generateTheme = ({ name, type }: ThemeContext) => {
+/**
+ * Asynchronously generates a theme file based on the provided context.
+ *
+ * The process includes:
+ * 1. Logging the start message.
+ * 2. Creating theme tokens.
+ * 3. Writing the theme file to disk.
+ * 4. Logging success messages after each step.
+ *
+ * @param {ThemeContext} context - An object with `name` and `type` of the theme.
+ * @returns {Promise<void>} A promise that resolves once the theme is written.
+ */
+export const generateTheme = async ({ name, type }: ThemeContext): Promise<void> => {
 	console.log(HELLO(name));
 
 	const { red, redBG, bold, green, greenBG, blackBG, yellow } = FancyText;
-
 	setThemeType(type);
 
 	console.log('1. Creating theme tokens');
@@ -39,14 +50,21 @@ export const generateTheme = ({ name, type }: ThemeContext) => {
 	const path = getPath(type);
 	const displayPath = blackBG(yellow(path));
 
-	console.log(`2. Attempting to write theme at: ${displayPath}\n`);
+	console.log(`2. Attempting to write theme at: ${displayPath}`);
 
-	fs.mkdir(basePath, { recursive: true })
-		.then(() => Promise.all([fs.writeFile(path, JSON.stringify(publicTheme, null, 2))]))
-		.then(() => console.log(`${bold(greenBG(' Success: '))} ${green('Theme was successfully created!')}\n`))
-		.then(() => console.log(GOODBYE))
-		.catch((error: Error) => {
-			console.log(`${bold(redBG(' Error: '))} ${red(error?.message)}\n`);
-			process.exit(1);
-		});
+	try {
+		await fs.mkdir(basePath, { recursive: true });
+		console.log('3. Directory created successfully\n');
+
+		await fs.writeFile(path, JSON.stringify(publicTheme, null, 2));
+		console.log(`${bold(greenBG(' Success: '))} ${green('Theme was successfully created!')}\n`);
+
+		console.log(GOODBYE);
+	} catch (error: unknown) {
+		error instanceof Error
+			? console.log(`${bold(redBG(' Error: '))} ${red(error.message)}\n`)
+			: console.log(`${bold(redBG(' Error: '))} ${red(String(error))}\n`);
+
+		process.exit(1);
+	}
 };

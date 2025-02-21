@@ -1,4 +1,6 @@
 import { generateTheme } from './core';
 
-generateTheme({ name: 'Crappy Night', type: 'dark' });
-generateTheme({ name: 'Crappy Daylight', type: 'light' });
+(async () => {
+	await generateTheme({ name: 'Crappy Night', type: 'dark' });
+	await generateTheme({ name: 'Crappy Daylight', type: 'light' });
+})();

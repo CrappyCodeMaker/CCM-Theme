@@ -261,7 +261,13 @@ export const tokenCustomizations: Token[] = [
 		},
 	},
 	{
-		scope: ['keyword.operator.expression.typeof', 'keyword.other.typeof'],
+		scope: [
+			'keyword.operator.expression.typeof',
+			'keyword.other.typeof',
+			'keyword.operator.expression.instanceof',
+			'keyword.operator.expression.instanceof',
+			'keyword.operator.instanceof',
+		],
 		settings: {
 			foreground: ['cyan', 600],
 		},
@@ -341,12 +347,6 @@ export const tokenCustomizations: Token[] = [
 			'punctuation.separator.namespace',
 			'keyword.operator.dart',
 		],
-		settings: {
-			foreground: ['magenta', 400],
-		},
-	},
-	{
-		scope: ['keyword.operator.expression.instanceof', 'keyword.operator.instanceof'],
 		settings: {
 			foreground: ['magenta', 400],
 		},
