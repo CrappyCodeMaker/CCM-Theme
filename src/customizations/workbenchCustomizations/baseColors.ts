@@ -12,7 +12,7 @@ export const baseColors = {
 	// Shadow color of widgets such as Find/Replace inside the editor
 	'widget.shadow': ['neutral', 800],
 	// Background color of text selections in the workbench (for input fields or text areas, does not apply to selections within the editor and the terminal)
-	'selection.background': ['neutral', 200, 10],
+	'selection.background': ['neutral', 300, 30],
 	// Foreground color for description text providing additional information, for example for a label
 	descriptionForeground: ['neutral', 200],
 	// Overall foreground color for error messages (this color is only used if not overridden by a component)
