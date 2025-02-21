@@ -1,34 +1,27 @@
 // 👉 Get SET colors for manual UI testing
 import { promises as fs } from 'fs';
-import { ANSIcolors } from '../../src/colors';
-import { GOODBYE, HELLO, settingsFile, shortPathToVscodeSettings, vscodeDir } from '../test-constants';
-import { setThemeType } from '../../src/theme';
-import { resolveSyntaxTokens, resolveWorkbenchTokens } from '../../src/resolvers';
+import { displayPath, GOODBYE, HELLO, settingsFile, vscodeDir } from './utils';
 import { tokenCustomizations, workbenchCustomizations } from '../../src/customizations';
-
-const { green, greenBG, yellow, yellowBG, redBG, blackBG, reset } = ANSIcolors;
+import { resolveSyntaxTokens, resolveWorkbenchTokens } from '../../src/core';
+import { getNotification } from '../../src/notifications';
 
 console.log(HELLO);
-console.log(`> ${yellow}Creating theme tokens${reset}`);
-
-setThemeType('dark');
+console.log(getNotification('info', 'Creating theme tokens\n'));
 
 const themeColors = {
 	'workbench.colorCustomizations': resolveWorkbenchTokens(workbenchCustomizations),
-	'editor.tokenColorCustomizations': { textMateRules: resolveSyntaxTokens(tokenCustomizations as any) },
+	'editor.tokenColorCustomizations': { textMateRules: resolveSyntaxTokens(tokenCustomizations) },
 };
 
-const displayPath = shortPathToVscodeSettings(settingsFile);
-
-console.log(`> ${yellow}Writing ${yellowBG} SET COLORS ${reset}${yellow} settings to:${reset} ${blackBG}${displayPath}${reset}`);
+console.log(`${getNotification('info', 'Writing "SET COLORS" for testing at:')} ${displayPath}\n`);
 
 fs.mkdir(vscodeDir, { recursive: true })
 	.then(() => fs.writeFile(settingsFile, JSON.stringify(themeColors, null, 2)))
 	.then(() => {
-		console.log(`> ${green}File written ${reset}${greenBG} successfully ${reset}`);
+		console.log(getNotification('success', `Theme was successfully created\n`));
 		console.log(GOODBYE);
 	})
 	.catch((error: Error) => {
-		console.warn(`${redBG}ERROR: ${reset}`, error.message);
+		console.log(getNotification('error', error?.message));
 		process.exit(1);
 	});

@@ -1,2 +1,3 @@
 export { tokenCustomizations } from './tokenCustomizations';
-export * as workbenchCustomizations from './workbenchCustomizations';
+export { workbenchCustomizations } from './workbenchCustomizations';
+export type { Token, NestedObject } from './types';

@@ -1,6 +1,9 @@
-import { DEFAULT, TESTER, TRANSPARENT, type HexColor, type Theme, type Token } from '../colors';
+import { Default, DEFAULT, TESTER, TRANSPARENT, type HexColor } from '../colors';
+import { NestedObject, Token } from '../customizations';
 import { getHEXColor } from './helpers';
-import { isNestedObject } from '../validators';
+import { isNestedObject } from './validators';
+
+export type Theme = Record<string, HexColor | Default>;
 
 /**
  * Recursively flattens a nested theme object into a flat theme object.
@@ -18,7 +21,7 @@ import { isNestedObject } from '../validators';
  * @param {Theme} [result={}] - The accumulator object that collects flattened theme values.
  * @returns {Theme} The flattened theme object with keys mapping to HEX color strings.
  */
-export const resolveWorkbenchTokens = (obj: object, isTest: boolean = false, result: Theme = {}): any => {
+export const resolveWorkbenchTokens = (obj: NestedObject, isTest: boolean = false, result: Theme = {}): any => {
 	Object.entries(obj).forEach(([key, value]) => {
 		if (isNestedObject(value) && !Array.isArray(value)) resolveWorkbenchTokens(value, isTest, result);
 		if (isTest && value === undefined) result[key] = TESTER;

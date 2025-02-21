@@ -1,4 +1,4 @@
-import { Token } from '../colors/types';
+import { Token } from './types';
 
 const baseTokens: Token[] = [
 	{

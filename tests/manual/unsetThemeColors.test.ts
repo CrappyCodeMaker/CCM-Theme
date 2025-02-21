@@ -1,29 +1,27 @@
 // 👉 Get UNSET colors for manual UI testing
 import { promises as fs } from 'fs';
-import { ANSIcolors } from '../../src/colors';
-import { resolveWorkbenchTokens } from '../../src/resolvers';
 import { workbenchCustomizations } from '../../src/customizations';
-import { GOODBYE, HELLO, settingsFile, shortPathToVscodeSettings, vscodeDir } from '../test-constants';
+import { displayPath, GOODBYE, HELLO, settingsFile, vscodeDir } from './utils';
+import { getNotification } from '../../src/notifications';
+import { resolveWorkbenchTokens } from '../../src/core';
 
-const { green, greenBG, yellow, yellowBG, redBG, blackBG, reset } = ANSIcolors;
+console.log(HELLO);
+console.log(getNotification('info', 'Creating theme tokens\n'));
 
 const unsetThemeColors = {
 	'workbench.colorCustomizations': resolveWorkbenchTokens(workbenchCustomizations as any, true),
 	'editor.tokenColorCustomizations': { textMateRules: [] },
 };
 
-const displayPath = shortPathToVscodeSettings(settingsFile);
-
-console.log(HELLO);
-console.log(`> ${yellow}Writing ${yellowBG} UNSET COLORS ${reset}${yellow} settings to:${reset} ${blackBG}${displayPath}${reset}`);
+console.log(`${getNotification('info', 'Writing "UNSET COLORS" for testing at:')} ${displayPath}\n`);
 
 fs.mkdir(vscodeDir, { recursive: true })
 	.then(() => fs.writeFile(settingsFile, JSON.stringify(unsetThemeColors, null, 2)))
 	.then(() => {
-		console.log(`> ${green}File written ${reset}${greenBG} successfully ${reset}`);
+		console.log(getNotification('success', `Theme was successfully created\n`));
 		console.log(GOODBYE);
 	})
 	.catch((error: Error) => {
-		console.warn(`${redBG}ERROR: ${reset}`, error.message);
+		console.log(getNotification('error', error?.message));
 		process.exit(1);
 	});

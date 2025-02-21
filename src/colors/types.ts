@@ -14,8 +14,6 @@ export type HexColor = `#${string}`;
 export type ColorName = keyof (typeof colorsSets)['dark'];
 export type Shade = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 export type OpacityLevel = 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90;
-export type NestedObject = { [key: string]: NestedObject | Default | HSLColor | string | undefined };
-export type Theme = Record<string, HexColor>;
 
 /**
  * A set of shades for a color.
@@ -35,13 +33,4 @@ export type HSLColor = {
 	S: number;
 	L: number;
 	A?: number;
-};
-
-export type Token = {
-	scope: string | string[];
-	settings: {
-		foreground?: string | [string, number] | [string, number, number];
-		[key: string]: any;
-	};
-	[key: string]: any;
 };

@@ -23,6 +23,6 @@
 		"sourceMap": false,
 		"pretty": true
 	},
-	"include": ["src"],
+	"include": ["src", "tests"],
 	"exclude": ["node_modules"]
 }

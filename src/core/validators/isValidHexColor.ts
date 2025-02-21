@@ -1,17 +1,18 @@
-import type { HexColor } from '../colors';
+import type { HexColor } from '../../colors';
 
 /**
  * @group Validators
  *
- * @description Checks if a string is a valid hex color. This validator
- * supports the following hex formats:
+ * @description Checks if a given value is a valid hex color string.
+ * This validator supports the following hex color formats (case-insensitive):
  * - `#RGB`
  * - `#RGBA`
  * - `#RRGGBB`
  * - `#RRGGBBAA`
+ * If the input is not a string or is undefined, the function returns false.
  *
- * @param {unknown} color - The string value to check. May be undefined.
- * @returns {color is HexColor} `true` if the input is a valid hex color string, otherwise `false`.
+ * @param {unknown} color - The value to check. May be undefined.
+ * @returns {color is HexColor} Returns `true` if the input is a valid hex color string, otherwise `false`.
  *
  * @example
  * isValidHexColor('#FFF');      // => true  (short 3-digit format)

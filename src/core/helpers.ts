@@ -1,5 +1,4 @@
 import {
-	ANSIcolors,
 	Color,
 	opacityLevelMap,
 	SHADES,
@@ -11,10 +10,12 @@ import {
 	type Shade,
 } from '../colors';
 import { colorsSets } from '../colors/palettes';
-import { getThemeType } from './generateTheme';
-import { isValidHexColor, isValidOpacity, isValidShade } from '../validators';
+import { getNotification } from '../notifications';
+import { getThemeType } from './themeContext';
+import { isValidHexColor, isValidOpacity, isValidShade } from './validators';
 
 /**
+ * @private
  * Appends an opacity value to a HEX color using the opacity level map.
  *
  * @param {HexColor} color - The base HEX color.
@@ -24,6 +25,7 @@ import { isValidHexColor, isValidOpacity, isValidShade } from '../validators';
 const hexWithOpacity = (color: HexColor, opacity: OpacityLevel): HexColor => `${color}${opacityLevelMap.get(opacity)}`;
 
 /**
+ * @private
  * Generates a HEX color from a given color value. If the input is a string,
  * it is interpreted as a HEX color; otherwise, it is treated as an HSL color.
  *
@@ -45,7 +47,7 @@ const generateColor = (color: HexColor | HSLColor): HexColor => (typeof color ==
  * @throws {Error} If the input array does not have exactly 10 items.
  */
 export const generateShades = (colors: (HexColor | HSLColor)[]): ColorShades => {
-	if (colors.length !== 10) throw new Error('Input array must have a length of 10.');
+	if (colors.length !== 10) throw new Error(getNotification('error', 'Input array must have a length of 10\n'));
 
 	const shadesMap = new Map<Shade, HexColor>();
 	colors.forEach((color, index) => shadesMap.set(SHADES[index], generateColor(color)));
@@ -70,20 +72,19 @@ export const getHEXColor = (colorName: ColorName | string, shade: Shade | string
 	const type = getThemeType();
 
 	const colorsMap = generateShades(colorsSets[type]?.[colorName]);
-	if (!colorsMap)
-		throw new Error(`${ANSIcolors.red}Invalid colorsMap color:${ANSIcolors.reset} ${ANSIcolors.redBG} ${colorsMap} ${ANSIcolors.reset}`);
+	if (!colorsMap) throw new Error(getNotification('error', `Invalid colorsMap color: ${getNotification('text', colorName, { bg: 'redBG' })}\n`));
 
-	if (!isValidShade(shade)) throw new Error(`${ANSIcolors.red}Invalid Shade:${ANSIcolors.reset} ${ANSIcolors.redBG} ${shade} ${ANSIcolors.reset}`);
+	if (!isValidShade(shade)) throw new Error(getNotification('error', `Invalid Shade: ${getNotification('text', `${shade}`, { bg: 'redBG' })}\n`));
 
 	const hexColor = colorsMap.get(shade);
 
 	if (!isValidHexColor(hexColor))
-		throw new Error(`${ANSIcolors.red}Invalid HEX color:${ANSIcolors.reset} ${ANSIcolors.redBG} ${hexColor} ${ANSIcolors.reset}`);
+		throw new Error(getNotification('error', `Invalid HEX color: ${getNotification('text', `${hexColor}`, { bg: 'redBG' })}\n`));
 
 	if (!opacity) return hexColor;
 
 	if (!isValidOpacity(opacity))
-		throw new Error(`${ANSIcolors.red}Invalid Opacity value:${ANSIcolors.reset} ${ANSIcolors.redBG} ${opacity} ${ANSIcolors.reset}`);
+		throw new Error(getNotification('error', `Invalid Opacity value: ${getNotification('text', `${opacity}`, { bg: 'redBG' })}\n`));
 
 	return hexWithOpacity(hexColor, opacity);
 };
