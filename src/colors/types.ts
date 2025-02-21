@@ -1,4 +1,4 @@
-import { colorsSets } from './sets';
+import { colorsSets } from './palettes';
 
 /**
  * Represents a single valid hex digit (0-9, A-F, a-f).

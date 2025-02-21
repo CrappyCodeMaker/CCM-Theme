@@ -1,19 +1,8 @@
 import { promises as fs } from 'fs';
-import { ANSIcolors } from './colors';
-import { tokenCustomizations, workbenchCustomizations } from './customizations';
+import { ANSIcolors } from '../colors';
+import { tokenCustomizations, workbenchCustomizations } from '../customizations';
 import { resolveSyntaxTokens, resolveWorkbenchTokens } from './resolvers';
-
-// #region Theme Type
-
-type ThemeContext = { name: string; type: 'dark' | 'light' };
-type ThemeType = ThemeContext['type'];
-
-let themeType: ThemeType = 'dark';
-
-export const setThemeType = (type: ThemeType) => (themeType = type);
-export const getThemeType = () => themeType;
-
-// #endregion Theme Type
+import { setThemeType, ThemeContext } from './themeContext';
 
 const getPath = (name: string) => {
 	const base = './public/themes/';
@@ -28,7 +17,7 @@ const getPath = (name: string) => {
 	}
 };
 
-export const getTheme = ({ name, type }: ThemeContext) => {
+export const generateTheme = ({ name, type }: ThemeContext) => {
 	setThemeType(type);
 
 	const publicTheme = {

@@ -9,10 +9,10 @@ import {
 	type HSLColor,
 	type OpacityLevel,
 	type Shade,
-} from './colors';
-import { colorsSets } from './colors/sets';
-import { getThemeType } from './theme';
-import { isValidHexColor, isValidOpacity, isValidShade } from './validators';
+} from '../colors';
+import { colorsSets } from '../colors/palettes';
+import { getThemeType } from './generateTheme';
+import { isValidHexColor, isValidOpacity, isValidShade } from '../validators';
 
 /**
  * Appends an opacity value to a HEX color using the opacity level map.

@@ -63,7 +63,7 @@
 		"build": "tsc",
 		"prepackage": "pnpm generate-theme",
 		"package": "vsce package",
-		"generate-theme": "pnpm tsx ./src/index.ts",
+		"generate-theme": "pnpm tsx ./src/main.ts",
 		"test": "NODE_ENV=unittest vitest",
 		"test:set": "pnpm tsx ./tests/manual/themeColors.test.ts",
 		"test:unset": "pnpm tsx ./tests/manual/unsetThemeColors.test.ts",

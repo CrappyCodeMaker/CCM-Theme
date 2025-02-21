@@ -1,6 +1,6 @@
-import { DEFAULT, TESTER, TRANSPARENT, type HexColor, type Theme, type Token } from './colors';
+import { DEFAULT, TESTER, TRANSPARENT, type HexColor, type Theme, type Token } from '../colors';
 import { getHEXColor } from './helpers';
-import { isNestedObject } from './validators';
+import { isNestedObject } from '../validators';
 
 /**
  * Recursively flattens a nested theme object into a flat theme object.

@@ -12,7 +12,7 @@
  * - ...
  * - `hslArray[9]` => shade 50 (lightest)
  */
-export const HSL_Dark = {
+export const dark = {
 	neutral: [
 		{ H: 220, S: 28, L: 8 },
 		{ H: 220, S: 24, L: 14 },
