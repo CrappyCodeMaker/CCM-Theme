@@ -1,5 +1,7 @@
 import path from 'path';
-import { getNotification } from '../../src/notifications';
+import { FancyText } from '../../src/core/fancyText';
+
+const { cyan, yellow, blackBG } = FancyText;
 
 export const vscodeDir = path.resolve(process.cwd(), '.vscode');
 export const settingsFile = path.join(vscodeDir, 'settings.json');
@@ -10,13 +12,11 @@ export const settingsFile = path.join(vscodeDir, 'settings.json');
  */
 const shortPathToVscodeSettings = (fullPath: string): string => {
 	const searchPart = '.vscode/settings.json';
-	return getNotification('text', fullPath.endsWith(searchPart) ? `~/${searchPart}` : fullPath, { bg: 'blackBG' });
+	return blackBG(yellow(fullPath.endsWith(searchPart) ? `~/${searchPart}` : fullPath));
 };
 
 export const displayPath = shortPathToVscodeSettings(settingsFile);
 
-export const HELLO = getNotification('text', '∙---------------------------∙\n| STARTING COLOR GENERATION |\n∙---------------------------∙\n', {
-	fg: 'cyan',
-});
+export const HELLO = cyan('∙---------------------------∙\n| STARTING COLOR GENERATION |\n∙---------------------------∙\n');
 
-export const GOODBYE = getNotification('text', '∙-----------------∙\n| GENERATION DONE |\n∙-----------------∙\n', { fg: 'cyan' });
+export const GOODBYE = cyan('∙-----------------∙\n| GENERATION DONE |\n∙-----------------∙\n');

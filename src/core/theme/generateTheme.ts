@@ -1,8 +1,9 @@
 import { promises as fs } from 'fs';
-import { tokenCustomizations, workbenchCustomizations } from '../customizations';
-import { resolveSyntaxTokens, resolveWorkbenchTokens } from './resolvers';
-import { ThemeContext, ThemeType } from './themeContext';
-import { getNotification } from '../notifications';
+import { tokenCustomizations, workbenchCustomizations } from '../../customizations';
+import { resolveSyntaxTokens } from './resolveSyntaxTokens';
+import { FancyText } from '../fancyText';
+import { setThemeType, ThemeContext, ThemeType } from './themeContext';
+import { resolveWorkbenchTokens } from './resolveWorkbenchTokens';
 
 const basePath = './public/themes';
 
@@ -18,6 +19,8 @@ const getPath = (type: ThemeType) => {
 };
 
 export const generateTheme = ({ name, type }: ThemeContext) => {
+	setThemeType(type);
+	const { red, redBG, bold, green, greenBG } = FancyText;
 	const publicTheme = {
 		name,
 		type,
@@ -28,9 +31,9 @@ export const generateTheme = ({ name, type }: ThemeContext) => {
 
 	fs.mkdir(basePath, { recursive: true })
 		.then(() => Promise.all([fs.writeFile(getPath(type), JSON.stringify(publicTheme, null, 2))]))
-		.then(() => console.log(getNotification('success', `Theme "${name}" successfully created\n`)))
+		.then(() => console.log(`${bold(greenBG(' Success: '))} ${green(`Theme "${bold(name)}" was successfully created`)}\n`))
 		.catch((error: Error) => {
-			console.log(getNotification('error', error?.message));
+			console.log(`${bold(redBG(' Error: '))} ${red(error?.message)}`);
 			process.exit(1);
 		});
 };

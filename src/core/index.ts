@@ -1,3 +1,4 @@
+export { FancyText } from './fancyText';
 export * from './validators';
-export { generateTheme } from './generateTheme';
-export { resolveWorkbenchTokens, resolveSyntaxTokens } from './resolvers';
+export * from './colors';
+export * from './theme';
