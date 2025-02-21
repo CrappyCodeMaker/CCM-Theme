@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Color, HexColor, HSLColor } from '../src/colors';
+import { Color, HexColor, HSLColor } from '../../src/colors';
 
 describe('Color class', () => {
 	describe('fromHSL()', () => {

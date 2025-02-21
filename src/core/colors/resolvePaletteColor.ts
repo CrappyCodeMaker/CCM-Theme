@@ -4,6 +4,7 @@ import { FancyText } from '../fancyText';
 import { generateShades } from './generateShades';
 import { getThemeType } from '../theme/themeContext';
 import { isValidHexColor, isValidOpacity, isValidShade } from '../validators';
+import { json } from 'stream/consumers';
 
 /**
  * @private
@@ -51,9 +52,13 @@ export const resolvePaletteColor = (
 	if (!isValidShade(shade)) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid Shade:')} ${bold(redBG(shade))}\n`);
 
 	const shadesMap = generateShades(palette);
-	const hexColor = shadesMap.get(shade);
+	const hexColor = shadesMap.get(Number(shade) as Shade);
 
-	if (!hexColor || !isValidHexColor(hexColor)) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid HEX color:')}\n`);
+	if (!hexColor || !isValidHexColor(hexColor)) {
+		throw new Error(
+			`${bold(redBG(' Error: '))} ${red('Invalid HEX color:')} ${redBG(`${JSON.stringify(shadesMap, null, 2)} | ${shade} | ${colorName}`)}\n`,
+		);
+	}
 	if (opacity == null) return hexColor;
 
 	const numericOpacity = Number(opacity);
