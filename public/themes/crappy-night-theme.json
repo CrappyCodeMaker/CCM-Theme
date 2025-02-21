@@ -115,14 +115,14 @@
     "debugConsole.errorForeground": "#E75F88",
     "debugConsole.sourceForeground": "default",
     "debugConsoleInputIcon.foreground": "#4C5361",
-    "diffEditor.insertedTextBackground": "#38F0A033",
+    "diffEditor.insertedTextBackground": "#38F0A01A",
     "diffEditor.insertedTextBorder": "#0000",
-    "diffEditor.removedTextBackground": "#F0386F33",
+    "diffEditor.removedTextBackground": "#F0386F1A",
     "diffEditor.removedTextBorder": "#0000",
     "diffEditor.border": "#0000",
     "diffEditor.diagonalFill": "#4C5361",
-    "diffEditor.insertedLineBackground": "#38F0A033",
-    "diffEditor.removedLineBackground": "#F0386F33",
+    "diffEditor.insertedLineBackground": "#38F0A01A",
+    "diffEditor.removedLineBackground": "#F0386F1A",
     "diffEditorGutter.insertedLineBackground": "#0000",
     "diffEditorGutter.removedLineBackground": "#0000",
     "diffEditorOverview.insertedForeground": "default",
@@ -1051,7 +1051,10 @@
     {
       "scope": [
         "keyword.operator.expression.typeof",
-        "keyword.other.typeof"
+        "keyword.other.typeof",
+        "keyword.operator.expression.instanceof",
+        "keyword.operator.expression.instanceof",
+        "keyword.operator.instanceof"
       ],
       "settings": {
         "foreground": "#09BACE"
@@ -1134,15 +1137,6 @@
         "punctuation.separator.pointer-access",
         "punctuation.separator.namespace",
         "keyword.operator.dart"
-      ],
-      "settings": {
-        "foreground": "#E75FDE"
-      }
-    },
-    {
-      "scope": [
-        "keyword.operator.expression.instanceof",
-        "keyword.operator.instanceof"
       ],
       "settings": {
         "foreground": "#E75FDE"
