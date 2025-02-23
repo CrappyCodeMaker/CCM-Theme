@@ -2,11 +2,11 @@
 	"name": "crappycode-theme",
 	"displayName": "CrappyCodeMaker Theme",
 	"description": "CrappyCodeMaker themes for VS Code",
-	"version": "2.1.0-beta.2",
+	"version": "2.1.0-beta.5",
 	"author": "Danil Reznichenko [@danilrez]",
 	"publisher": "CrappyCodeMaker",
 	"license": "MIT",
-	"icon": "public/images/icon.png",
+	"icon": "build/icon.png",
 	"galleryBanner": {
 		"color": "#232934",
 		"theme": "dark"
@@ -40,12 +40,12 @@
 			{
 				"label": "Crappy Night",
 				"uiTheme": "vs-dark",
-				"path": "./public/themes/crappy-night-theme.json"
+				"path": "build/themes/crappy-night-theme.json"
 			},
 			{
 				"label": "✨NEW✨ Crappy Daylight",
 				"uiTheme": "vs",
-				"path": "./public/themes/crappy-daylight-theme.json"
+				"path": "build/themes/crappy-daylight-theme.json"
 			}
 		]
 	},
@@ -59,14 +59,16 @@
 		"vitest": "^3.0.6"
 	},
 	"scripts": {
-		"prebuild": "rm -rf ./build",
-		"build": "tsc",
-		"prepackage": "pnpm generate-theme",
-		"package": "vsce package",
-		"generate-theme": "pnpm tsx ./src/main.ts",
+		"prepackage": "rm -rf ./build && pnpm copy-resources && pnpm generate:themes",
+		"package": "vsce package -o ./build/crappycode-theme-${npm_package_version}.vsix",
+		"generate:themes": "pnpm tsx ./src/index.ts",
+		"generate:dark": "pnpm generate:themes --dark",
+		"generate:light": "pnpm generate:themes --light",
+		"copy-resources": "mkdir -p build && cp images/icon.png build/icon.png",
 		"test": "NODE_ENV=unittest vitest",
-		"test:set": "pnpm tsx ./tests/manual/themeColors.test.ts",
-		"test:unset": "pnpm tsx ./tests/manual/unsetThemeColors.test.ts",
+		"test:dark": "pnpm generate:themes --dark --test",
+		"test:light": "pnpm generate:themes --light --test",
+		"test:unset": "pnpm tsx ./src/index.ts --dark --test-unset",
 		"test:terminal": "for i in {0..15}; do printf \"\\e[48;5;${i}m  %3d  \\e[0m\" \"$i\"; (( (i+1) % 8 == 0 )) && echo \"\"; done",
 		"ci:prettier": "prettier . --write"
 	},

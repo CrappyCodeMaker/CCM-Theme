@@ -1,12 +1,9 @@
-# Exclude EVERYTHING by default
+# Exclude everything by default
 **
 
-# Re-include Files
+# Re-include only the "build" folder and the following files:
+!build/
 !CHANGELOG
 !LICENSE
 !package.json
 !README.md
-
-# Re-include Folders
-!public/themes
-!public/images/icon.png

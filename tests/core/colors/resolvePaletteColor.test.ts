@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { setThemeType } from '../../../src/core/theme/themeContext';
+import { ThemeState } from '../../../src/core';
 import { ColorName, HexColor, opacityLevelMap, SHADES } from '../../../src/colors';
 import { isValidHexColor, resolvePaletteColor } from '../../../src/core';
 
-setThemeType('dark');
+const themeContextManager = new ThemeState();
+themeContextManager.setThemeType('dark');
 
 describe('resolvePaletteColor()', () => {
 	it('returns a valid HEX color for a known palette and valid shade without opacity', () => {

@@ -2,9 +2,9 @@ import { opacityLevelMap, type ColorName, type HexColor, type OpacityLevel, type
 import { palettes } from '../../colors/palettes';
 import { FancyText } from '../fancyText';
 import { generateShades } from './generateShades';
-import { getThemeType } from '../theme/themeContext';
 import { isValidHexColor, isValidOpacity, isValidShade } from '../validators';
-import { json } from 'stream/consumers';
+import { themeContextManager } from '../..';
+import { ERROR_HEADER } from '../cli';
 
 /**
  * @private
@@ -44,25 +44,22 @@ export const resolvePaletteColor = (
 	shade: Shade | string | number,
 	opacity?: OpacityLevel | string | number,
 ): HexColor => {
-	const themeType = getThemeType();
-	const palette = palettes[themeType]?.[colorName];
+	const palette = palettes?.[themeContextManager.getThemeType()]?.[colorName];
 	const { red, redBG, bold } = FancyText;
 
-	if (!palette) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid palette for color:')} ${bold(redBG(colorName))}\n`);
-	if (!isValidShade(shade)) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid Shade:')} ${bold(redBG(shade))}\n`);
+	if (!palette) throw new Error(`${ERROR_HEADER} ${red('Invalid palette for color:')} ${bold(redBG(colorName))}\n`);
+	if (!isValidShade(shade)) throw new Error(`${ERROR_HEADER} ${red('Invalid Shade:')} ${bold(redBG(shade))}\n`);
 
 	const shadesMap = generateShades(palette);
 	const hexColor = shadesMap.get(Number(shade) as Shade);
 
 	if (!hexColor || !isValidHexColor(hexColor)) {
-		throw new Error(
-			`${bold(redBG(' Error: '))} ${red('Invalid HEX color:')} ${redBG(`${JSON.stringify(shadesMap, null, 2)} | ${shade} | ${colorName}`)}\n`,
-		);
+		throw new Error(`${ERROR_HEADER} ${red('Invalid HEX color:')} ${redBG(`${JSON.stringify(shadesMap, null, 2)} | ${shade} | ${colorName}`)}\n`);
 	}
 	if (opacity == null) return hexColor;
 
 	const numericOpacity = Number(opacity);
-	if (!isValidOpacity(numericOpacity)) throw new Error(`${bold(redBG(' Error: '))} ${red('Invalid Opacity value:')} ${bold(redBG(opacity))}\n`);
+	if (!isValidOpacity(numericOpacity)) throw new Error(`${ERROR_HEADER} ${red('Invalid Opacity value:')} ${bold(redBG(opacity))}\n`);
 
 	return hexWithOpacity(hexColor, numericOpacity);
 };

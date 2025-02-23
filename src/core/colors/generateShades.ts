@@ -1,4 +1,5 @@
 import { Color, ColorShades, HexColor, HSLColor, Shade, SHADES } from '../../colors';
+import { ERROR_HEADER } from '../cli';
 import { FancyText } from '../fancyText';
 
 /**
@@ -15,8 +16,8 @@ import { FancyText } from '../fancyText';
  * @throws {Error} If the input array does not have exactly 10 items.
  */
 export const generateShades = (colors: (HexColor | HSLColor)[]): ColorShades => {
-	const { red, redBG, bold } = FancyText;
-	if (colors.length !== 10) throw new Error(`${bold(redBG(' Error: '))} ${red('Input array must have a length of 10')}\n`);
+	const { red } = FancyText;
+	if (colors.length !== 10) throw new Error(`${ERROR_HEADER} ${red('Input array must have a length of 10')}\n`);
 
 	const shadesMap = new Map<Shade, HexColor>();
 	colors.forEach((color, index) => shadesMap.set(SHADES[index], typeof color === 'string' ? Color.fromHEX(color).hex : Color.fromHSL(color).hex));
